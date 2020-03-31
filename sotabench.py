@@ -40,7 +40,9 @@ ImageNet.benchmark(
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=256,
+    num_workers=args.num_workers,
     num_gpu=1,
+    paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
     model_description="Official weights from the author's of the paper."
 )
 torch.cuda.empty_cache()
@@ -68,7 +70,9 @@ ImageNet.benchmark(
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=256,
+    num_workers=args.num_workers,
     num_gpu=1,
+    paper_results={'Top 1 Accuracy': 0.814, 'Top 5 Accuracy': 0.956},
     model_description="Official weights from the author's of the paper."
 )
 torch.cuda.empty_cache()
@@ -96,7 +100,9 @@ ImageNet.benchmark(
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=128,
+    num_workers=args.num_workers,
     num_gpu=1,
+    paper_results={'Top 1 Accuracy': 0.820, 'Top 5 Accuracy': 0.959},
     model_description="Official weights from the author's of the paper."
 )
 torch.cuda.empty_cache()
