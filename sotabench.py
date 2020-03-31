@@ -30,14 +30,16 @@ val_tfms = transforms.Compose(
     [transforms.Resize(int(args.input_size / args.val_zoom_factor)),
      transforms.CenterCrop(args.input_size)])
 val_tfms.transforms.append(transforms.ToTensor())
-    
+
+print('Benchmarking TResNet-M')
+
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
     paper_model_name='TResNet-M',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
-    batch_size=512,
+    batch_size=256,
     num_gpu=1,
     model_description="Official weights from the author's of the paper."
 )
@@ -56,7 +58,9 @@ val_tfms = transforms.Compose(
     [transforms.Resize(int(args.input_size / args.val_zoom_factor)),
      transforms.CenterCrop(args.input_size)])
 val_tfms.transforms.append(transforms.ToTensor())
-    
+
+print('Benchmarking TResNet-L')
+
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
@@ -83,6 +87,8 @@ val_tfms = transforms.Compose(
      transforms.CenterCrop(args.input_size)])
 val_tfms.transforms.append(transforms.ToTensor())
     
+print('Benchmarking TResNet-XL')
+
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
