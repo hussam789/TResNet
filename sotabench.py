@@ -50,8 +50,8 @@ parser.add_argument('--num_workers', type=int, default=8)
 # parsing args
 args = parser.parse_args()
 tresnet_m_file_id = '12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV'
-model_path = './mtresnet.pth'
-download_file_from_google_drive(tresnet_m_file_id, model_path)
+model_path = './tresnet_m.pth'
+# download_file_from_google_drive(tresnet_m_file_id, model_path)
 # TResNet-M
 # model_path, _ = urllib.request.urlretrieve('https://drive.google.com/open?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV', destination)
 print(model_path)
