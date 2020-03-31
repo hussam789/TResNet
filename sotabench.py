@@ -22,7 +22,7 @@ args = parser.parse_args()
 
 # TResNet-M
 model_path, _ = urllib.request.urlretrieve('https://drive.google.com/open?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV', 'mtresnet.pth')
-
+print(model_path)
 model = create_model(args).cuda()
 state = torch.load(model_path, map_location='cpu')['model']
 model.load_state_dict(state, strict=True)
@@ -40,7 +40,7 @@ ImageNet.benchmark(
     paper_model_name='TResNet-M',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
-    batch_size=32,
+    batch_size=256,
     num_gpu=1,
     model_description="Official weights from the author's of the paper."
 )
