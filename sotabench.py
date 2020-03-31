@@ -44,6 +44,7 @@ ImageNet.benchmark(
 torch.cuda.empty_cache()
 
 # TResNet-L
+args.model_name = 'tresnet_l'
 model_path = './tresnet_l.pth'
 model = create_model(args).cuda()
 state = torch.load(model_path, map_location='cpu')['model']
@@ -69,6 +70,7 @@ ImageNet.benchmark(
 torch.cuda.empty_cache()
 
 # TResNet-XL
+args.model_name = 'tresnet_xl'
 model_path = './tresnet_xl.pth'
 model = create_model(args).cuda()
 state = torch.load(model_path, map_location='cpu')['model']
