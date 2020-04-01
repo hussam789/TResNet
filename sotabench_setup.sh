@@ -10,6 +10,8 @@ $PYTHON -m pip install torch>=1.3
 $PYTHON -m pip install torchvision>=0.4.0
 $PYTHON -m pip install git+https://github.com/mapillary/inplace_abn.git@v1.0.11
 $PYTHON -m pip install gdown
+$PYTHON -m pip install --upgrade pip
+$PYTHON -m pip install --upgrade Pillow
 
 ### Pillow-simd with libjpeg turbo
 #python -m pip uninstall -y pillow
@@ -21,9 +23,7 @@ $PYTHON -m pip install gdown
 #--no-binary :all:--compile https://github.com/mrT23/pillow-simd/zipball/simd/7.0.x
 #conda install -y jpeg libtiff
 #python -c "from PIL import Image; print(Image.PILLOW_VERSION)"
-#python -c "from PIL import features; assert features.check_feature('libjpeg_turbo'), 'libjpeg_turbo import issue'"
-python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade Pillow
+
 #python3 -m pip install -U --force-reinstall pip
 #python3 -m pip uninstall -y pillow
 #CC="cc -mavx2" python3 -m pip install -U --force-reinstall pillow-simd
