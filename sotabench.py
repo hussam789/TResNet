@@ -42,6 +42,7 @@ ImageNet.benchmark(
     batch_size=256,
     num_workers=args.num_workers,
     num_gpu=1,
+    pin_memory=True,
     paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
     model_description="Official weights from the author's of the paper."
 )
@@ -72,6 +73,7 @@ ImageNet.benchmark(
     batch_size=256,
     num_workers=args.num_workers,
     num_gpu=1,
+    pin_memory=True,
     paper_results={'Top 1 Accuracy': 0.814, 'Top 5 Accuracy': 0.956},
     model_description="Official weights from the author's of the paper."
 )
@@ -102,6 +104,7 @@ ImageNet.benchmark(
     batch_size=128,
     num_workers=args.num_workers,
     num_gpu=1,
+    pin_memory=True,
     paper_results={'Top 1 Accuracy': 0.820, 'Top 5 Accuracy': 0.959},
     model_description="Official weights from the author's of the paper."
 )
