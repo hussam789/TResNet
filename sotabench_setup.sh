@@ -1,7 +1,7 @@
 #!/usr/bin/env bash -x
 source /workspace/venv/bin/activate
 PYTHON=${PYTHON:-"python"}
-export DEBIAN_FRONTEND="noninteractive"
+export DEBIAN_FRONTEND=noninteractive
 # REPO="$( cd "$(dirname "$0")" ; cd .. ; pwd -P )"
 # cd $REPO
 
