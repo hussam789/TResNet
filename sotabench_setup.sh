@@ -12,6 +12,7 @@ $PYTHON -m pip install git+https://github.com/mapillary/inplace_abn.git@v1.0.11
 $PYTHON -m pip install gdown
 
 # pillow simd
+python -m pip install -U --force-reinstall pip
 apt-get -qq update
 apt-get install -y libwebp-dev
 CFLAGS="${CFLAGS} -mavx2" pip install --upgrade --no-cache-dir --force-reinstall \
