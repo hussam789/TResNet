@@ -10,7 +10,7 @@ import argparse
 
 from src.models.tresnet.tresnet import InplacABN_to_ABN
 from src.models.utils.fuse_bn import fuse_bn_recursively
-from src.models.tresnet.layers import TestTimePoolHead
+from src.models.tresnet.layers.avg_pool import TestTimePoolHead
 
 parser = argparse.ArgumentParser(description='PyTorch TResNet ImageNet Inference')
 parser.add_argument('--val_dir')
