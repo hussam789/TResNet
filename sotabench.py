@@ -128,6 +128,9 @@ ImageNet.benchmark(
     paper_results={'Top 1 Accuracy': 0.820, 'Top 5 Accuracy': 0.959},
     model_description="Official weights from the author's of the paper."
 )
+
+del model
+gc.collect()
 torch.cuda.empty_cache()
 
 
