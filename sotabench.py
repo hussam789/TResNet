@@ -10,6 +10,7 @@ import argparse
 
 from src.models.tresnet.tresnet import InplacABN_to_ABN
 from src.models.utils.fuse_bn import fuse_bn_recursively
+from src.models.tresnet.layers import TestTimePoolHead
 
 parser = argparse.ArgumentParser(description='PyTorch TResNet ImageNet Inference')
 parser.add_argument('--val_dir')
@@ -47,7 +48,35 @@ ImageNet.benchmark(
     paper_model_name='TResNet-M',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
-    batch_size=464,
+    batch_size=432,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
+    model_description="Official weights from the author's of the paper."
+)
+
+# del model
+gc.collect()
+torch.cuda.empty_cache()
+
+# MTResNet 288-Mean-Max
+
+val_tfms = transforms.Compose(
+    [transforms.Resize(288)])
+val_tfms.transforms.append(transforms.ToTensor())
+
+model = TestTimePoolHead(model)
+
+print('Benchmarking TResNet-M (288-Mean-Max)')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-M (288-Mean-Max)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=250,
     num_workers=args.num_workers,
     num_gpu=1,
     pin_memory=True,
@@ -56,8 +85,6 @@ ImageNet.benchmark(
 )
 
 del model
-gc.collect()
-torch.cuda.empty_cache()
 
 # TResNet-L
 args.model_name = 'tresnet_l'
