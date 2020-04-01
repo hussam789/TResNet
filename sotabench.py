@@ -148,7 +148,7 @@ model.eval()
 
 val_bs = args.batch_size
 val_tfms = transforms.Compose(
-    [transforms.Resize(args.input_size, args.input_size)])
+    [transforms.Resize((args.input_size, args.input_size))])
 val_tfms.transforms.append(transforms.ToTensor())
     
 print('Benchmarking TResNet-M 448')
