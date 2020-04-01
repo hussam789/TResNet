@@ -24,10 +24,6 @@ $PYTHON -m pip install --upgrade Pillow
 #conda install -y jpeg libtiff
 #python -c "from PIL import Image; print(Image.PILLOW_VERSION)"
 
-#python3 -m pip install -U --force-reinstall pip
-#python3 -m pip uninstall -y pillow
-#CC="cc -mavx2" python3 -m pip install -U --force-reinstall pillow-simd
-
 gdown https://drive.google.com/uc?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV
 gdown https://drive.google.com/uc?id=14X7xL1uf3c9dVGzRdV49bTjCBNvT9koA
 gdown https://drive.google.com/uc?id=1HKFZEWPIwk5ZR0_MjJNkpQLyM_0yX0Qq
