@@ -22,8 +22,10 @@ $PYTHON -m pip install gdown
 #conda install -y jpeg libtiff
 #python -c "from PIL import Image; print(Image.PILLOW_VERSION)"
 #python -c "from PIL import features; assert features.check_feature('libjpeg_turbo'), 'libjpeg_turbo import issue'"
-pip uninstall pillow
-CC="cc -mavx2" pip install -U --force-reinstall pillow-simd
+python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade Pillow
+python3 -m pip uninstall pillow
+CC="cc -mavx2" python3 -m pip pip install -U --force-reinstall pillow-simd
 
 gdown https://drive.google.com/uc?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV
 gdown https://drive.google.com/uc?id=14X7xL1uf3c9dVGzRdV49bTjCBNvT9koA
