@@ -24,9 +24,10 @@ $PYTHON -m pip install gdown
 #python -c "from PIL import features; assert features.check_feature('libjpeg_turbo'), 'libjpeg_turbo import issue'"
 python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade Pillow
-#python3 -m pip install -U --force-reinstall pip
-#python3 -m pip uninstall -y pillow
-#CC="cc -mavx2" python3 -m pip install -U --force-reinstall pillow-simd
+sudo apt install zlib1g
+python3 -m pip install -U --force-reinstall pip
+python3 -m pip uninstall -y pillow
+CC="cc -mavx2" python3 -m pip install -U --force-reinstall pillow-simd
 
 gdown https://drive.google.com/uc?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV
 gdown https://drive.google.com/uc?id=14X7xL1uf3c9dVGzRdV49bTjCBNvT9koA
