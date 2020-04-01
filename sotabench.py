@@ -132,7 +132,7 @@ torch.cuda.empty_cache()
 
 
 # TResNet-M-448
-args.model_name = 'tresnet_xl'
+args.model_name = 'tresnet_m'
 model_path = './tresnet_m_448.pth'
 args.input_size = 448
 model = create_model(args)
