@@ -1,6 +1,7 @@
 #!/usr/bin/env bash -x
 source /workspace/venv/bin/activate
 PYTHON=${PYTHON:-"python"}
+export DEBIAN_FRONTEND="noninteractive"
 # REPO="$( cd "$(dirname "$0")" ; cd .. ; pwd -P )"
 # cd $REPO
 
@@ -15,7 +16,7 @@ apt-get -qq update
 apt-get install -y libwebp-dev
 CFLAGS="${CFLAGS} -mavx2" pip install --upgrade --no-cache-dir --force-reinstall \
 --no-binary :all:--compile https://github.com/mrT23/pillow-simd/zipball/simd/7.0.x
-apt-get install libjpeg-dev
+apt-get install -y libjpeg-dev
 python -c "from PIL import Image; print(Image.PILLOW_VERSION)"
 python -c "from PIL import features; assert features.check_feature('libjpeg_turbo'), 'libjpeg_turbo import issue'"
 
