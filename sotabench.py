@@ -159,7 +159,7 @@ ImageNet.benchmark(
     paper_model_name='TResNet-M (input=448)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
-    batch_size=200,
+    batch_size=224,
     num_workers=args.num_workers,
     num_gpu=1,
     pin_memory=True,
