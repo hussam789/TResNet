@@ -60,6 +60,42 @@ del model
 gc.collect()
 torch.cuda.empty_cache()
 
+# TResNet-M-288
+model_path = './tresnet_m.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize(int(288 / args.val_zoom_factor)),
+     transforms.CenterCrop(288)])
+val_tfms.transforms.append(transforms.ToTensor())
+
+print('Benchmarking TResNet-M-288')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-M (input=288)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=432,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
+    model_description="Official weights from the author's of the paper."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
+
 # MTResNet 288-Mean-Max
 
 val_bs = args.batch_size
@@ -84,7 +120,7 @@ print('Benchmarking TResNet-M (288-Mean-Max)')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-M-288 (Mean-Max)',
+    paper_model_name='TResNet-M (288-Mean-Max)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=432,
@@ -155,7 +191,7 @@ model = InplacABN_to_ABN(model)
 model = fuse_bn_recursively(model)
 model = model.cuda()
 model.eval()
-print('Benchmarking TResNet-L-288 (Mean-Max)')
+print('Benchmarking TResNet-L (288-Mean-Max)')
 
 # Run the benchmark
 ImageNet.benchmark(
@@ -231,7 +267,7 @@ model = InplacABN_to_ABN(model)
 model = fuse_bn_recursively(model)
 model = model.cuda()
 model.eval()
-print('Benchmarking TResNet-XL-288 (Mean-Max)')
+print('Benchmarking TResNet-XL (288-Mean-Max)')
 
 # Run the benchmark
 ImageNet.benchmark(
@@ -273,7 +309,7 @@ print('Benchmarking TResNet-M 448')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-M-448 (input=448)',
+    paper_model_name='TResNet-M (input=448)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=125,
@@ -287,51 +323,6 @@ ImageNet.benchmark(
 del model
 gc.collect()
 torch.cuda.empty_cache()
-
-# TResNet-M-512-Mean-Max
-# args.model_name = 'tresnet_m'
-# model_path = './tresnet_m_448.pth'
-# args.input_size = 448
-# model = create_model(args)
-# state = torch.load(model_path, map_location='cpu')['model']
-# model.load_state_dict(state, strict=True)
-
-# model = TestTimePoolHead(model)
-
-# model = InplacABN_to_ABN(model)
-# model = fuse_bn_recursively(model)
-# model = model.cuda()
-# model.eval()
-
-# val_bs = args.batch_size
-# # val_tfms = transforms.Compose(
-# #     [transforms.Resize(args.input_size),
-# #      transforms.CenterCrop(args.input_size)])
-# # val_tfms.transforms.append(transforms.ToTensor())
-
-# val_tfms = transforms.Compose(
-#     [transforms.Resize((args.input_size, args.input_size))])
-# val_tfms.transforms.append(transforms.ToTensor())
-    
-# print('Benchmarking TResNet-M 448-mean-max')
-
-# # Run the benchmark
-# ImageNet.benchmark(
-#     model=model,
-#     paper_model_name='TResNet-M (448-mean-max)',
-#     paper_arxiv_id='2003.13630',
-#     input_transform=val_tfms,
-#     batch_size=125,
-#     num_workers=args.num_workers,
-#     num_gpu=1,
-#     pin_memory=True,
-#     paper_results={'Top 1 Accuracy': 0.832},
-#     model_description="Official weights from the author's of the paper."
-# )
-
-# del model
-# gc.collect()
-# torch.cuda.empty_cache()
 
 # TResNet-L-448
 args.model_name = 'tresnet_l'
@@ -355,7 +346,7 @@ print('Benchmarking TResNet-L 448')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-L-448 (input=448)',
+    paper_model_name='TResNet-L (input=448)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=64,
@@ -392,7 +383,7 @@ print('Benchmarking TResNet-XL 448')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-XL-448 (input=448)',
+    paper_model_name='TResNet-XL (input=448)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=32,
