@@ -62,8 +62,10 @@ torch.cuda.empty_cache()
 
 # MTResNet 288-Mean-Max
 
+val_bs = args.batch_size
 val_tfms = transforms.Compose(
-    [transforms.Resize(288)])
+    [transforms.Resize(288),
+     transforms.CenterCrop(288)])
 val_tfms.transforms.append(transforms.ToTensor())
 
 model_path = './tresnet_m.pth'
