@@ -305,8 +305,13 @@ model.eval()
 
 val_bs = args.batch_size
 val_tfms = transforms.Compose(
-    [transforms.Resize((args.input_size, args.input_size))])
+    [transforms.Resize(args.input_size),
+     transforms.CenterCrop(args.input_size)])
 val_tfms.transforms.append(transforms.ToTensor())
+
+# val_tfms = transforms.Compose(
+#     [transforms.Resize((args.input_size, args.input_size))])
+# val_tfms.transforms.append(transforms.ToTensor())
     
 print('Benchmarking TResNet-M 512-mean-max')
 
@@ -321,6 +326,80 @@ ImageNet.benchmark(
     num_gpu=1,
     pin_memory=True,
     paper_results={'Top 1 Accuracy': 0.832},
+    model_description="Official weights from the author's of the paper."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
+
+# TResNet-L-448
+args.model_name = 'tresnet_l'
+model_path = './tresnet_l_448.pth'
+args.input_size = 448
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize((args.input_size, args.input_size))])
+val_tfms.transforms.append(transforms.ToTensor())
+    
+print('Benchmarking TResNet-L 448')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-L (input=448)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=64,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.838},
+    model_description="Official weights from the author's of the paper."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
+
+# TResNet-XL-448
+args.model_name = 'tresnet_xl'
+model_path = './tresnet_xl_448.pth'
+args.input_size = 448
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize((args.input_size, args.input_size))])
+val_tfms.transforms.append(transforms.ToTensor())
+    
+print('Benchmarking TResNet-XL 448')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-XL (input=448)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=32,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.843},
     model_description="Official weights from the author's of the paper."
 )
 
