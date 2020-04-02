@@ -148,7 +148,7 @@ model = create_model(args)
 state = torch.load(model_path, map_location='cpu')['model']
 model.load_state_dict(state, strict=True)
 
-model = TestTimePoolHead(model)
+model = TestTimePoolHead(model, 5)
 
 model = InplacABN_to_ABN(model)
 model = fuse_bn_recursively(model)
