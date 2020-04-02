@@ -160,7 +160,7 @@ print('Benchmarking TResNet-L-288 (Mean-Max)')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-L-288 (Mean-Max)',
+    paper_model_name='TResNet-L (288-Mean-Max)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=250,
@@ -236,7 +236,7 @@ print('Benchmarking TResNet-XL-288 (Mean-Max)')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-XL-288 (Mean-Max)',
+    paper_model_name='TResNet-XL (288-Mean-Max)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=250,
@@ -273,7 +273,7 @@ print('Benchmarking TResNet-M 448')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-M-448',
+    paper_model_name='TResNet-M-448 (input=448)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=125,
@@ -355,7 +355,7 @@ print('Benchmarking TResNet-L 448')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-L-448',
+    paper_model_name='TResNet-L-448 (input=448)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=64,
@@ -392,7 +392,7 @@ print('Benchmarking TResNet-XL 448')
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-XL-448',
+    paper_model_name='TResNet-XL-448 (input=448)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=32,
