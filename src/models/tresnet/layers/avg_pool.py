@@ -44,7 +44,7 @@ class TestTimePoolHead(nn.Module):
         self.model = model
         self.original_pool = original_pool
         # base_fc = self.model.head[0]
-        self.avgmax_pool2d = FastGlobalAvgMaxPool2d()
+#         self.avgmax_pool2d = FastGlobalAvgMaxPool2d()
 
         self.fc = nn.Conv2d(
             self.model.num_features, self.model.num_classes, kernel_size=1, bias=True)
@@ -59,6 +59,6 @@ class TestTimePoolHead(nn.Module):
         x = self.model.body(x)
         x = F.avg_pool2d(x, kernel_size=self.original_pool, stride=1)
         x = self.fc(x)
-#         x = adaptive_avgmax_pool2d(x, 1)
-        x = self.avgmax_pool2d(x)
+        x = adaptive_avgmax_pool2d(x, 1)
+#         x = self.avgmax_pool2d(x)
         return x.view(x.size(0), -1)
