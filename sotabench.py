@@ -291,12 +291,12 @@ torch.cuda.empty_cache()
 # TResNet-M-512-Mean-Max
 args.model_name = 'tresnet_m'
 model_path = './tresnet_m_448.pth'
-args.input_size = 512
+args.input_size = 448
 model = create_model(args)
 state = torch.load(model_path, map_location='cpu')['model']
 model.load_state_dict(state, strict=True)
 
-model = TestTimePoolHead(model, 14)
+model = TestTimePoolHead(model)
 
 model = InplacABN_to_ABN(model)
 model = fuse_bn_recursively(model)
@@ -304,21 +304,21 @@ model = model.cuda()
 model.eval()
 
 val_bs = args.batch_size
-val_tfms = transforms.Compose(
-    [transforms.Resize(args.input_size),
-     transforms.CenterCrop(args.input_size)])
-val_tfms.transforms.append(transforms.ToTensor())
-
 # val_tfms = transforms.Compose(
-#     [transforms.Resize((args.input_size, args.input_size))])
+#     [transforms.Resize(args.input_size),
+#      transforms.CenterCrop(args.input_size)])
 # val_tfms.transforms.append(transforms.ToTensor())
+
+val_tfms = transforms.Compose(
+    [transforms.Resize((args.input_size, args.input_size))])
+val_tfms.transforms.append(transforms.ToTensor())
     
-print('Benchmarking TResNet-M 512-mean-max')
+print('Benchmarking TResNet-M 448-mean-max')
 
 # Run the benchmark
 ImageNet.benchmark(
     model=model,
-    paper_model_name='TResNet-M (512-mean-max)',
+    paper_model_name='TResNet-M (448-mean-max)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=125,
