@@ -56,7 +56,7 @@ ImageNet.benchmark(
     model_description="Official weights from the author's of the paper."
 )
 
-# del model
+del model
 gc.collect()
 torch.cuda.empty_cache()
 
@@ -66,8 +66,17 @@ val_tfms = transforms.Compose(
     [transforms.Resize(288)])
 val_tfms.transforms.append(transforms.ToTensor())
 
+model_path = './tresnet_m.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+
 model = TestTimePoolHead(model)
 
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
 print('Benchmarking TResNet-M (288-Mean-Max)')
 
 # Run the benchmark
@@ -85,6 +94,8 @@ ImageNet.benchmark(
 )
 
 del model
+gc.collect()
+torch.cuda.empty_cache()
 
 # TResNet-L
 args.model_name = 'tresnet_l'
