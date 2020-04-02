@@ -295,6 +295,9 @@ args.input_size = 512
 model = create_model(args)
 state = torch.load(model_path, map_location='cpu')['model']
 model.load_state_dict(state, strict=True)
+
+model = TestTimePoolHead(model, 14)
+
 model = InplacABN_to_ABN(model)
 model = fuse_bn_recursively(model)
 model = model.cuda()
