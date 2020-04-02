@@ -43,13 +43,13 @@ class TestTimePoolHead(nn.Module):
         super(TestTimePoolHead, self).__init__()
         self.model = model
         self.original_pool = original_pool
-        base_fc = self.model.head[0]
+        # base_fc = self.model.head[0]
         # self.avgmax_pool2d = FastGlobalAvgMaxPool2d()
 
         self.fc = nn.Conv2d(
             self.model.num_features, self.model.num_classes, kernel_size=1, bias=True)
-        self.fc.weight.data.copy_(base_fc.weight.data.view(self.fc.weight.size()))
-        self.fc.bias.data.copy_(base_fc.bias.data.view(self.fc.bias.size()))
+        self.fc.weight.data.copy_(self.model.head[0].weight.data.view(self.fc.weight.size()))
+        self.fc.bias.data.copy_(self.model.head[0].bias.data.view(self.fc.bias.size()))
 
         # delete original fc layer
         del self.model.head
