@@ -53,7 +53,7 @@ class TestTimePoolHead(nn.Module):
 
         # delete original fc layer
         del self.model.head
-        del self.model.self.global_pool
+        del self.model.global_pool
 
     def forward(self, x):
         x = self.model.body(x)
