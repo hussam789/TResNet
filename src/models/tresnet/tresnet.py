@@ -153,6 +153,7 @@ class TResNet(nn.Module):
         self.embeddings = []
         self.global_pool = nn.Sequential(OrderedDict([('global_pool_layer', global_pool_layer)]))
         self.num_features = (self.planes * 8) * Bottleneck.expansion
+        self.num_classes = num_classes
         fc = nn.Linear(self.num_features, num_classes)
         self.head = nn.Sequential(OrderedDict([('fc', fc)]))
 
