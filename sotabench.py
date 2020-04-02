@@ -112,7 +112,7 @@ val_tfms = transforms.Compose(
      transforms.CenterCrop(288)])
 val_tfms.transforms.append(transforms.ToTensor())
 
-print('Benchmarking TResNet-M')
+print('Benchmarking TResNet-M-228-valzoom')
 
 # Run the benchmark
 ImageNet.benchmark(
@@ -171,6 +171,43 @@ del model
 gc.collect()
 torch.cuda.empty_cache()
 
+# MTResNet 288-Mean-Max-Squish
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize((288, 288))])
+val_tfms.transforms.append(transforms.ToTensor())
+
+model_path = './tresnet_m.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+
+model = TestTimePoolHead(model)
+
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+print('Benchmarking TResNet-M (288-Mean-Max-Squish)')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-M (288-Mean-Max-Squish)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=432,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
+    model_description="Official weights from the author's of the paper."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
 # MTResNet 224-Mean-Max
 
 val_bs = args.batch_size
@@ -313,6 +350,44 @@ print('Benchmarking TResNet-M (288-Mean-Max-448W)')
 ImageNet.benchmark(
     model=model,
     paper_model_name='TResNet-M (288-Mean-Max-448W (valzoom)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=432,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
+    model_description="Official weights from the author's of the paper."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
+
+# MTResNet 288-Mean-Max-448W-squish
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize((288, 288))])
+val_tfms.transforms.append(transforms.ToTensor())
+
+model_path = './tresnet_m_448.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+
+model = TestTimePoolHead(model)
+
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+print('Benchmarking TResNet-M (288-Mean-Max-448W)')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-M (288-Mean-Max-448W-Squish)',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
     batch_size=432,
