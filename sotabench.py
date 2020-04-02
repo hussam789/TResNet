@@ -60,6 +60,42 @@ del model
 gc.collect()
 torch.cuda.empty_cache()
 
+# TResNet-M-224-448W
+model_path = './tresnet_m_448.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize(int(args.input_size / args.val_zoom_factor)),
+     transforms.CenterCrop(args.input_size)])
+val_tfms.transforms.append(transforms.ToTensor())
+
+print('Benchmarking TResNet-M (448W)')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-M (448W)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=432,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
+    model_description="Official weights from the author's of the paper."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
+
 # TResNet-M-288
 model_path = './tresnet_m.pth'
 model = create_model(args)
@@ -174,6 +210,45 @@ del model
 gc.collect()
 torch.cuda.empty_cache()
 
+# MTResNet 224-Mean-Max-vazoom
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize(int(224 / args.val_zoom_factor)),
+     transforms.CenterCrop(224)])
+val_tfms.transforms.append(transforms.ToTensor())
+
+model_path = './tresnet_m.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+
+model = TestTimePoolHead(model, 5)
+
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+print('Benchmarking TResNet-M (224-Mean-Max)')
+
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-M (224-Mean-Max)',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=432,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
+    model_description="Official weights from the author's of the paper."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
+
 # MTResNet 288-Mean-Max-448W
 
 val_bs = args.batch_size
@@ -217,7 +292,7 @@ torch.cuda.empty_cache()
 
 val_bs = args.batch_size
 val_tfms = transforms.Compose(
-    [transforms.Resize(288 / args.val_zoom_factor),
+    [transforms.Resize(int(288 / args.val_zoom_factor)),
      transforms.CenterCrop(288)])
 val_tfms.transforms.append(transforms.ToTensor())
 
