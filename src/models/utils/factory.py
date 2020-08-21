@@ -3,7 +3,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from ..tresnet import TResnetM, TResnetL, TResnetXL
-
+from ..tresnet_v2 import TResnetL_V2
 
 def create_model(args):
     """Create a model
@@ -18,6 +18,8 @@ def create_model(args):
         model = TResnetL(model_params)
     elif args.model_name=='tresnet_xl':
         model = TResnetXL(model_params)
+    elif args.model_name=='tresnet_l_v2':
+        model = TResnetL_V2(model_params)
     else:
         print("model: {} not found !!".format(args.model_name))
         exit(-1)

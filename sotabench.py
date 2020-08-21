@@ -23,7 +23,45 @@ parser.add_argument('--num_workers', type=int, default=8)
 
 # parsing args
 args = parser.parse_args()
-# TResNet-M
+
+# TResNet-L-2
+args.model_name = 'tresnet_l_v2'
+model_path = './tresnet_l_2.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model.eval()
+
+val_bs = args.batch_size
+val_tfms = transforms.Compose(
+    [transforms.Resize(int(args.input_size / args.val_zoom_factor)),
+     transforms.CenterCrop(args.input_size)])
+val_tfms.transforms.append(transforms.ToTensor())
+
+print('Benchmarking TResNet-L-V2')
+# Run the benchmark
+ImageNet.benchmark(
+    model=model,
+    paper_model_name='TResNet-L-V2',
+    paper_arxiv_id='2003.13630',
+    input_transform=val_tfms,
+    batch_size=280,
+    num_workers=args.num_workers,
+    num_gpu=1,
+    pin_memory=True,
+    paper_results={'Top 1 Accuracy': 0.819, 'Top 5 Accuracy': 0.951},
+    model_description="TResNet-L-V2."
+)
+
+del model
+gc.collect()
+torch.cuda.empty_cache()
+
+# TResNet-L-V2
+args.model_name = 'tresnet_m'
 model_path = './tresnet_m.pth'
 model = create_model(args)
 state = torch.load(model_path, map_location='cpu')['model']
