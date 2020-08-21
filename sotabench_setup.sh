@@ -29,3 +29,7 @@ CC="cc -mavx2" $PYTHON -m pip install -U --force-reinstall pillow-simd
 gdown https://drive.google.com/uc?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV
 gdown https://drive.google.com/uc?id=14X7xL1uf3c9dVGzRdV49bTjCBNvT9koA
 gdown https://drive.google.com/uc?id=1HKFZEWPIwk5ZR0_MjJNkpQLyM_0yX0Qq
+
+gdown https://drive.google.com/uc?id=1cTOwVmxLqWhNl8zg2ZZJfiyejEcOq1RR
+gdown https://drive.google.com/uc?id=1jgKXMoJpZ6Sow_sJhgi5tec7AyeQCLbH
+gdown https://drive.google.com/uc?id=1IIPU77tcS83cBRTAfKeGvAmcBL5D196r
