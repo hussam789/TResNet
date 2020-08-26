@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 # cd $REPO
 
 $PYTHON -m pip install -e .
-$PYTHON -m pip install torch==1.3.0
+$PYTHON -m pip install torch==1.4.0
 $PYTHON -m pip install torchvision==0.4.0
 $PYTHON -m pip install git+https://github.com/mapillary/inplace_abn.git@v1.0.12
 $PYTHON -m pip install gdown
