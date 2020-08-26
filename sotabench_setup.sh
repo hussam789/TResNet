@@ -29,7 +29,8 @@ $PYTHON -m pip install --upgrade Pillow
 gdown https://drive.google.com/uc?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV
 gdown https://drive.google.com/uc?id=14X7xL1uf3c9dVGzRdV49bTjCBNvT9koA
 gdown https://drive.google.com/uc?id=1HKFZEWPIwk5ZR0_MjJNkpQLyM_0yX0Qq
-gdown https://drive.google.com/file/d/1pySDEdfvLRROaNXi-fWrd_aV9N6W9Yjo/view?usp=sharing
+gdown https://drive.google.com/uc?id=1pySDEdfvLRROaNXi-fWrd_aV9N6W9Yjo
+# gdown https://drive.google.com/file/d/1pySDEdfvLRROaNXi-fWrd_aV9N6W9Yjo/view?usp=sharing
 #gdown https://drive.google.com/uc?id=1cTOwVmxLqWhNl8zg2ZZJfiyejEcOq1RR
 #gdown https://drive.google.com/uc?id=1jgKXMoJpZ6Sow_sJhgi5tec7AyeQCLbH
 #gdown https://drive.google.com/uc?id=1IIPU77tcS83cBRTAfKeGvAmcBL5D196r
