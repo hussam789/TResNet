@@ -45,7 +45,6 @@ val_tfms.transforms.append(transforms.ToTensor())
 print('Benchmarking TResNet-L-V2')
 # Run the benchmark
 ImageNet.benchmark(
-    data_root='./',
     model=model,
     paper_model_name='TResNet-L-V2',
     paper_arxiv_id='2003.13630',
