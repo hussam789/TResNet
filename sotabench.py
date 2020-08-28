@@ -49,7 +49,7 @@ ImageNet.benchmark(
     paper_model_name='TResNet-L-V2',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
-    batch_size=250,
+    batch_size=300,
     num_workers=args.num_workers,
     num_gpu=1,
     pin_memory=True,
@@ -82,7 +82,6 @@ print('Benchmarking TResNet-M')
 
 # Run the benchmark
 ImageNet.benchmark(
-    data_root='./',
     model=model,
     paper_model_name='TResNet-M',
     paper_arxiv_id='2003.13630',
@@ -195,12 +194,11 @@ print('Benchmarking TResNet-L')
 
 # Run the benchmark
 ImageNet.benchmark(
-    data_root='./',
     model=model,
     paper_model_name='TResNet-L',
     paper_arxiv_id='2003.13630',
     input_transform=val_tfms,
-    batch_size=250,
+    batch_size=300,
     num_workers=args.num_workers,
     num_gpu=1,
     pin_memory=True,
@@ -272,7 +270,6 @@ print('Benchmarking TResNet-XL')
 
 # Run the benchmark
 ImageNet.benchmark(
-    data_root='./',
     model=model,
     paper_model_name='TResNet-XL',
     paper_arxiv_id='2003.13630',
