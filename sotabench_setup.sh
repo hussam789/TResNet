@@ -10,6 +10,7 @@ $PYTHON -m pip install torch==1.4.0
 $PYTHON -m pip install torchvision==0.5.0
 $PYTHON -m pip install git+https://github.com/mapillary/inplace_abn.git@v1.0.12
 $PYTHON -m pip install gdown
+
 $PYTHON -m pip install --upgrade pip
 $PYTHON -m pip install --upgrade Pillow
 
@@ -31,6 +32,7 @@ gdown https://drive.google.com/uc?id=12_VnXYI-4JaUYOOIsZXYCJdpiLCJ4dHV
 gdown https://drive.google.com/uc?id=14X7xL1uf3c9dVGzRdV49bTjCBNvT9koA
 gdown https://drive.google.com/uc?id=1HKFZEWPIwk5ZR0_MjJNkpQLyM_0yX0Qq
 
+apt-get install wget
 wget https://onedrive.hyper.ai/down/ImageNet/data/ImageNet2012/ILSVRC2012_devkit_t12.tar.gz -P ./.data/vision/imagenet
 wget https://onedrive.hyper.ai/down/ImageNet/data/ImageNet2012/ILSVRC2012_img_val.tar -P ./.data/vision/imagenet
 
