@@ -83,6 +83,7 @@ print('Benchmarking TResNet-M')
 
 # Run the benchmark
 ImageNet.benchmark(
+    data_root='./',
     model=model,
     paper_model_name='TResNet-M',
     paper_arxiv_id='2003.13630',
@@ -195,6 +196,7 @@ print('Benchmarking TResNet-L')
 
 # Run the benchmark
 ImageNet.benchmark(
+    data_root='./',
     model=model,
     paper_model_name='TResNet-L',
     paper_arxiv_id='2003.13630',
@@ -271,6 +273,7 @@ print('Benchmarking TResNet-XL')
 
 # Run the benchmark
 ImageNet.benchmark(
+    data_root='./',
     model=model,
     paper_model_name='TResNet-XL',
     paper_arxiv_id='2003.13630',
