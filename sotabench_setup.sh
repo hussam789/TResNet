@@ -15,8 +15,11 @@ $PYTHON -m pip install --upgrade pip
 $PYTHON -m pip install --upgrade Pillow
 
 ### Pillow-simd with libjpeg turbo
-#$PYTHON -m pip uninstall pillow
-#CC="cc -mavx2" $PYTHON -m pip install -U --force-reinstall pillow-simd
+$PYTHON -m pip uninstall pillow
+RUN apt-get install -y libjpeg-dev zlib1g-dev libpng-dev libwebp-dev
+CC="cc -mavx2" $PYTHON -m pip install -U --force-reinstall pillow-simd
+$PYTHON -c "from PIL import Image; print(Image.PILLOW_VERSION)"
+
 #python -m pip uninstall -y pillow
 #python -m pip install -U --force-reinstall pip
 #conda install -c conda-forge libjpeg-turbo pillow==7.0.0
