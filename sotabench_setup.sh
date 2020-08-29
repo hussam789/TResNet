@@ -15,9 +15,10 @@ $PYTHON -m pip install --upgrade pip
 $PYTHON -m pip install --upgrade Pillow
 
 ### Pillow-simd with libjpeg turbo
-$PYTHON -m pip uninstall pillow
+$PYTHON -m pip uninstall -y pillow
 RUN apt-get install -y libjpeg-dev zlib1g-dev libpng-dev libwebp-dev
-CC="cc -mavx2" $PYTHON -m pip install -U --force-reinstall pillow-simd
+CFLAGS="${CFLAGS} -mavx2" $PYTHON -m pip install --upgrade --no-cache-dir --force-reinstall \
+#--no-binary :all:--compile https://github.com/mrT23/pillow-simd/zipball/simd/7.0.x
 $PYTHON -c "from PIL import Image; print(Image.PILLOW_VERSION)"
 
 #python -m pip uninstall -y pillow
