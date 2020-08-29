@@ -18,8 +18,7 @@ $PYTHON -m pip install --upgrade Pillow
 $PYTHON -m pip uninstall -y pillow
 apt-get update
 apt-get install -y libjpeg-dev zlib1g-dev libpng-dev libwebp-dev
-CFLAGS="${CFLAGS} -mavx2" $PYTHON -m pip install --upgrade --no-cache-dir --force-reinstall \
-#--no-binary :all:--compile https://github.com/mrT23/pillow-simd/zipball/simd/7.0.x
+CFLAGS="${CFLAGS} -mavx2" $PYTHON -m pip install --upgrade --no-cache-dir --force-reinstall --no-binary :all:--compile https://github.com/mrT23/pillow-simd/zipball/simd/7.0.x
 $PYTHON -c "from PIL import Image; print(Image.PILLOW_VERSION)"
 
 #python -m pip uninstall -y pillow
