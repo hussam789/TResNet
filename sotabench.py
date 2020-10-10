@@ -52,7 +52,8 @@ for i in range(2):  # Two times for caching
         num_gpu=1,
         pin_memory=True,
         paper_results={'Top 1 Accuracy': 0.807, 'Top 5 Accuracy': 0.948},
-        model_description="Official weights from the author's of the paper."
+        model_description="Official weights from the author's of the paper.",
+        send_data_to_device=upload_data_to_gpu
     )
 
 del model
