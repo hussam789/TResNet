@@ -73,7 +73,7 @@ model = model.half()
 model.eval()
 
 # Run the benchmark
-print('Benchmarking TResNet-L-V2-FP16')
+print('Benchmarking TResNet-L-V2-FP16 ')
 for i in range(2):  # Two times for caching
     ImageNet.benchmark(
         model=model,
