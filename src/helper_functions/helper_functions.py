@@ -4,6 +4,20 @@ from torchvision.datasets import ImageFolder
 from torchvision.transforms import transforms
 
 
+def create_val_tfm(args):
+    val_tfms = transforms.Compose(
+        [transforms.Resize(int(args.input_size / args.val_zoom_factor)),
+         transforms.CenterCrop(args.input_size)])
+    val_tfms.transforms.append(transforms.ToTensor())
+    return val_tfms
+
+
+def upload_data_to_gpu(input, target, dtype=torch.float16):
+    input = input.to(device='cuda', dtype=dtype)
+    target = target.to(device='cuda', dtype=dtype)
+    return input, target
+
+
 def create_dataloader(args):
     val_bs = args.batch_size
     val_tfms = transforms.Compose(
