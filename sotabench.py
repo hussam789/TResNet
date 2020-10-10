@@ -47,7 +47,7 @@ for i in range(3):  # Two times for caching
         paper_model_name='TResNet-M-FP16',
         paper_arxiv_id='2003.13630',
         input_transform=val_tfms,
-        batch_size=800,
+        batch_size=640,
         num_workers=args.num_workers,
         num_gpu=1,
         pin_memory=True,
