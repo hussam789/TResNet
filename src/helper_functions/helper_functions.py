@@ -12,9 +12,9 @@ def create_val_tfm(args):
     return val_tfms
 
 
-def upload_data_to_gpu(input, target, dtype=torch.float16):
-    input = input.to(device='cuda', dtype=dtype)
-    target = target.to(device='cuda', dtype=dtype)
+def upload_data_to_gpu(input, target, device=torch.device("cuda:0"),dtype=torch.float16):
+    input = input.to(device=device, dtype=dtype)
+    target = target.to(device=device, dtype=dtype)
     return input, target
 
 
