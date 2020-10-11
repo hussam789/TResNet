@@ -93,7 +93,18 @@ del model
 gc.collect()
 torch.cuda.empty_cache()
 
-# Run the benchmark
+#### TResNet-M ####
+args.model_name = 'tresnet_m'
+model_path = './tresnet_m.pth'
+model = create_model(args)
+state = torch.load(model_path, map_location='cpu')['model']
+model.load_state_dict(state, strict=True)
+model = InplacABN_to_ABN(model)
+model = fuse_bn_recursively(model)
+model = model.cuda()
+model = model.half()
+model.eval()
+
 print('Benchmarking TResNet-M')
 for i in range(1):  # Two times for caching
     ImageNet.benchmark(
